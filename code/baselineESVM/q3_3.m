@@ -4,7 +4,7 @@ addpath(genpath('../lib/esvm'));
 load('../../data/bus_data.mat');
 load('../../data/bus_esvm.mat');
 
-aps=zeros(1,8);
+apss=zeros(1,8);
 boundingBoxes=cell(1,8);
 
 detectParams = esvm_get_default_params(); %get default detection parameters
@@ -13,8 +13,8 @@ for i=1:8
     boundingBoxes{i} = batchDetectImageESVM(gtImages, models, detectParams);
     
     [rec,prec,ap] = evalAP(gtBoxes,boundingBoxes{i});
-    aps(i)=ap;
+    apss(i)=ap;
 end
 
 figure;
-plot(3:10,aps);
+plot(3:10,apss);
