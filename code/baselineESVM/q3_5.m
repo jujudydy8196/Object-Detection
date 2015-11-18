@@ -34,7 +34,7 @@ for i=1:length(models)
     p = randperm(size(featureResponse,1),alpha);
     Feature_response=[Feature_response; featureResponse(p,:)];
 end
-
+Feature_response=double(Feature_response);
 detectParams = esvm_get_default_params(); %get default detection parameters
 detectParams.detect_levels_per_octave=3;
 K=20:10:150;
@@ -44,7 +44,7 @@ kk=1;
 for k=K
     fprintf('%d clusters...\n',k);
 %     k=30;
-    [label,~,~,dist] = kmeans(double(Feature_response), k,'EmptyAction','drop');
+    [label,~,~,dist] = kmeans(Feature_response, k,'EmptyAction','drop');
     Avg=cell(k,1);
     C=cell(k,1);
     for i=1:k
@@ -66,7 +66,7 @@ for k=K
     boundingBoxes{kk} = batchDetectImageESVM(gtImages, compactModels, detectParams);
   
     [rec,prec,ap] = evalAP(gtBoxes,boundingBoxes{kk});
-    aps(kk)=ap;
+    aps(kk)=ap
     kk=kk+1;
 end
 

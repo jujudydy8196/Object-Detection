@@ -44,8 +44,8 @@ for k=K
         C{i}=c;
         Avg{i}=uint8(avg/length(c));
     end
-    figure;
-    imdisp(Avg);
+%     figure;
+%     imdisp(Avg);
     
     [~,idx]=min(dist,[],1);
     
